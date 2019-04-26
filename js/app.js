@@ -19,7 +19,7 @@ const win = [
 ];
 
 game.addEventListener('click', function(e) {
-  // if(e.target.value === ''){}
+  if(e.target.value === ''){}
   e.target.innerHTML = 'x';
   playerArr.push(+e.target.getAttribute('id'));
   for(let i =0; i < win.length; i++){

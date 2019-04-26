@@ -19,17 +19,18 @@ const win = [
 ];
 
 game.addEventListener('click', function(e) {
-  if(e.target.value === ''){}
-  e.target.innerHTML = 'x';
-  playerArr.push(+e.target.getAttribute('id'));
-  for(let i =0; i < win.length; i++){
-    const winArr = win[i].filter(element => playerArr.includes(element));
-    if(winArr.length === 3){
-      whoWon.append('Игрок');
-      congrats.style.opacity = '1';
-    }
-    console.log(winArr);
-  }
+  
+  if(e.target.textContent === '') e.target.innerHTML = 'x';
+  // 
+  // playerArr.push(+e.target.getAttribute('id'));
+  // for(let i =0; i < win.length; i++){
+  //   const winArr = win[i].filter(element => playerArr.includes(element));
+  //   if(winArr.length === 3){
+  //     whoWon.append('Игрок');
+  //     congrats.style.opacity = '1';
+  //   }
+  //   console.log(winArr);
+  // }
   // console.log(playerArr);
   // console.log(intersection);
 });

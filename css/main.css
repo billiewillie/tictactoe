@@ -19,8 +19,9 @@ body {
   align-items: center;
 }
 
-.congrats{
+.congrats {
   opacity: 0;
+  min-height: 37px;
 }
 
 .game {

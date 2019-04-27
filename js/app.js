@@ -1,10 +1,8 @@
 "use strict";
 
-const cells = Array.from(document.querySelectorAll('td'));
 const wrapper = document.querySelector('.wrapper');
 const game = document.querySelector('.game');
 const congrats = document.querySelector('.congrats');
-const whoWon = document.querySelector('.whoWon');
 const playerArr = [];
 const compArr = [];
 const win = [
@@ -18,20 +16,24 @@ const win = [
   [3, 5, 7],
 ];
 
-game.addEventListener('click', function(e) {
+game.addEventListener('click', function (e) {
+  const emptyCells = Array
+    .from(document.querySelectorAll('td'))
+    .filter(element => element.innerHTML === '');
+  console.log(emptyCells);
+  if (emptyCells.includes(e.target)){
+    e.target.innerHTML = 'x';
+    playerArr.push(+e.target.getAttribute('id'));
+  } 
   
-  if(e.target.textContent === '') e.target.innerHTML = 'x';
-  // 
-  // playerArr.push(+e.target.getAttribute('id'));
-  // for(let i =0; i < win.length; i++){
-  //   const winArr = win[i].filter(element => playerArr.includes(element));
-  //   if(winArr.length === 3){
-  //     whoWon.append('Игрок');
-  //     congrats.style.opacity = '1';
-  //   }
-  //   console.log(winArr);
-  // }
-  // console.log(playerArr);
-  // console.log(intersection);
-});
 
+  for (let i = 0; i < win.length; i++) {
+    const winArr = win[i].filter(element => playerArr.includes(element));
+    if (winArr.length === 3) {
+      congrats.append('Игрок победил');
+      congrats.style.opacity = '1';
+    }
+    console.log(winArr);
+  }
+  console.log(playerArr);
+});

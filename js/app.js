@@ -5,6 +5,10 @@ const game = document.querySelector('.game');
 const congrats = document.querySelector('.congrats');
 const playerArr = [];
 const compArr = [];
+let endgame = false;
+let emptyCells = Array
+  .from(document.querySelectorAll('td'))
+  .filter(element => element.innerHTML === '');
 const win = [
   [1, 2, 3],
   [4, 5, 6],
@@ -17,33 +21,30 @@ const win = [
 ];
 
 game.addEventListener('click', function (e) {
-  const emptyCells = Array
-    .from(document.querySelectorAll('td'))
-    .filter(element => element.innerHTML === '');
-  if (emptyCells.includes(e.target)){
+  if (emptyCells.includes(e.target) && !endgame) {
     e.target.innerHTML = 'x';
     playerArr.push(+e.target.getAttribute('id'));
-    console.log(playerArr);
-  } 
-  compTurn();
+    emptyCells.splice(emptyCells.indexOf(e.target), 1);
+  }
   whoWon(playerArr, 'Игрок');
+  // compTurn();
+  console.log(emptyCells);
 });
 
-function compTurn(){
-  const emptyCells = Array
-    .from(document.querySelectorAll('td'))
-    .filter(element => element.innerHTML === '');
-  emptyCells[Math.floor(Math.random() * (emptyCells.length + 1))].innerHTML = 'o';
-  console.log(emptyCells);
-  // whoWon(compArr, 'Компьютер');
-}
+// function compTurn() {
+//   if (!endgame) {
+//     emptyCells[Math.floor(Math.random() * (emptyCells.length + 1))].innerHTML = 'o';
+//   }
+//   whoWon(compArr, 'Компьютер');
+// }
 
-function whoWon(arr, str){
+function whoWon(arr, str) {
   for (let i = 0; i < win.length; i++) {
     const winArr = win[i].filter(element => arr.includes(element));
     if (winArr.length === 3) {
       congrats.append(str + ' победил');
       congrats.style.opacity = '1';
+      endgame = true;
     }
   }
 }

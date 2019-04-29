@@ -25,18 +25,22 @@ game.addEventListener('click', function (e) {
     e.target.innerHTML = 'x';
     playerArr.push(+e.target.getAttribute('id'));
     emptyCells.splice(emptyCells.indexOf(e.target), 1);
+    whoWon(playerArr, 'Игрок');
   }
-  whoWon(playerArr, 'Игрок');
-  // compTurn();
-  console.log(emptyCells);
+  compTurn();
+  console.log(playerArr);
 });
 
-// function compTurn() {
-//   if (!endgame) {
-//     emptyCells[Math.floor(Math.random() * (emptyCells.length + 1))].innerHTML = 'o';
-//   }
-//   whoWon(compArr, 'Компьютер');
-// }
+function compTurn() {
+  if (!endgame) {
+    const number = Math.floor(Math.random() * emptyCells.length);
+    emptyCells[number].innerHTML = 'o';
+    compArr.push(+(emptyCells[number].getAttribute('id')));
+    emptyCells.splice(number, 1);
+    whoWon(compArr, 'Компьютер');
+  };
+  console.log(compArr);
+}
 
 function whoWon(arr, str) {
   for (let i = 0; i < win.length; i++) {
